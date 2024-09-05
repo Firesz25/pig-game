@@ -17,7 +17,7 @@ async fn main() {
     let router = Router::new().hoop(session_handler).push(
         Router::with_path("game")
             .goal(routes::game::game_ws)
-            .get(routes::game::new_game),
+            .push(Router::with_path("new").get(routes::game::new_game)),
     );
     let router2;
     if std::env::var("DEVELOPMENT").unwrap() == "true" {
